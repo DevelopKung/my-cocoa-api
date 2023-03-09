@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require("cors");
 const app = express();
 
-let cosr = process.env.NODE_ENV ? config.allow_cors_url : 'http://localhost:5000'
+let cosr = process.env.NODE_ENV != 'development' ? config.allow_cors_url : 'http://localhost:5000'
 var corsOptions = {
   origin: [cosr, process.env.ALLOW_CORS_URL_NAME, process.env.CYCLIC_URL],
   optionsSuccessStatus: 200
@@ -21,5 +21,3 @@ app.get('/', (req, res) => {
 })
 
 app.listen(process.env.PORT || 8001)
-
-// app.listen(process.env.PORT || 8001)

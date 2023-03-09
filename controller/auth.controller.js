@@ -13,7 +13,12 @@ module.exports = {
       if (username && password) {
         console.log(username == 'E-fat', password == '123456');
         if (username == 'E-fat' && password == '123456') {
-          let token = jwt.sign({ user: username }, config.jwt_secret, { expiresIn: time });
+          let user = {
+            username,
+            firstname: 'Admin',
+            lastname: 'Use'
+          }
+          let token = jwt.sign({ user }, config.jwt_secret, { expiresIn: time });
           let data = { token, expiresIn: time };
           res.status(200).send({ status: true, message: "success", payload: data });
           return
