@@ -11,7 +11,6 @@ module.exports = {
     const password = req.body.password;
     try {
       if (username && password) {
-        console.log(username == 'E-fat', password == '123456');
         if (username == 'E-fat' && password == '123456') {
           let user = {
             username,
