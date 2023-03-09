@@ -13,11 +13,11 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ limit: '20mb', extended: false }))
 app.use(express.json({ limit: '20mb' }))
 
-// const apiRouter = require('./router/index.router');
-// app.use('/', apiRouter);
+const apiRouter = require('./router/index.router');
+app.use('/', apiRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).send({ message: 'hello world', corsOptions })
+  res.status(200).send({ message: 'hello world' })
 })
 
 if (config.server_port === 443) {
