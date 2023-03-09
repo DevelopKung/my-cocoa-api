@@ -17,7 +17,7 @@ app.use(express.json({ limit: '20mb' }))
 // app.use('/', apiRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).send({message: 'hello world' })
+  res.status(200).send({ message: 'hello world', corsOptions })
 })
 
 if (config.server_port === 443) {
