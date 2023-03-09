@@ -6,13 +6,13 @@ var router = express.Router();
 const auth = require('./auth.router');
 router.use('/auth', auth);
 
-const bills = require('./bill.router');
-router.use('/bill', bills);
+// const bills = require('./bill.router');
+// router.use('/bill', bills);
 
-const products = require('./products.router');
-router.use('/product', products);
+// const products = require('./products.router');
+// router.use('/product', products);
 
-const topping = require('./topping.router');
-router.use('/topping', topping);
+// const topping = require('./topping.router');
+// router.use('/topping', topping);
 
 module.exports = router
