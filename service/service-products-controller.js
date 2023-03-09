@@ -1,12 +1,12 @@
 const fs = require('fs')
 const db = require("../models");
-const items = db.items
+const products = db.products
 const fc = require("./service");
 
 let self = module.exports = {
   QueryAll: async(params) => {
     try {
-      let res = await items.find()
+      let res = await products.find()
       let data = await fc.responseData(res, true, 'success')
       return data
     } catch (error) {
@@ -16,9 +16,9 @@ let self = module.exports = {
 
   },
 
-  QueryOne: async(bill_id) => {
+  QueryOne: async(prod_id) => {
     try {
-      let res = await items.findOne({ bill_id })
+      let res = await products.findOne({ prod_id })
       let data = await fc.responseData(res, true, 'success')
       return data
     } catch (error) {
@@ -29,7 +29,7 @@ let self = module.exports = {
 
   Create: async(params) => {
     try {
-      await items(params).save(params)
+      await products(params).save(params)
       let data = await fc.responseData(null, true, 'สร้างสำเร็จ')
       return data
     } catch (error) {
@@ -38,14 +38,14 @@ let self = module.exports = {
     }
   },
 
-  Update: async(bill_id, params) => {
+  Update: async(prod_id, params) => {
     try {
-      let res = await items.findOneAndUpdate({ bill_id }, params)
+      let res = await products.findOneAndUpdate({ prod_id }, params)
       if ([res].length == 1 && res) {
         let data = await fc.responseData(null, true, 'อัพเดทสำเร็จ')
         return data
       } else {
-        let data = await fc.responseData(null, true, `id ${bill_id} อัพเดทไม่สำเร็จ`)
+        let data = await fc.responseData(null, true, `id ${prod_id} อัพเดทไม่สำเร็จ`)
         return data
       }
     } catch (error) {
@@ -54,9 +54,9 @@ let self = module.exports = {
     }
   },
 
-  Delete: async(bill_id) => {
+  Delete: async(prod_id) => {
     try {
-      let res = await items.deleteOne({ bill_id })
+      await products.deleteOne({ prod_id })
       let data = await fc.responseData(null, true, 'ลบสำเร็จ')
       return data
     } catch (error) {
