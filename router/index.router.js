@@ -3,8 +3,8 @@ const express = require('express')
 var router = express.Router();
 
 /** Router */
-// const auth = require('./auth.router');
-// router.use('/auth', auth);
+const auth = require('./auth.router');
+router.use('/auth', auth);
 
 // const bills = require('./bill.router');
 // router.use('/bill', bills);

@@ -1,7 +1,5 @@
-const db = require("../models");
 const config = require("./../config/config");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 module.exports = {
   login: async(req, res) => {
