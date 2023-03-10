@@ -6,7 +6,12 @@ const fc = require("./service");
 let self = module.exports = {
   QueryAll: async(params) => {
     try {
-      let res = await bills.find()
+      let res = await bills.find({
+        created_date: {
+          $gte: new Date(params.start),
+          $lte: new Date(params.end)
+        }
+      })
       let data = await fc.responseData(res, true, 'success')
       return data
     } catch (error) {
