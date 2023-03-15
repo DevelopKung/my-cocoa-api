@@ -4,14 +4,11 @@ module.exports = {
 
   findAll: async(req, res) => {
     try {
-      let data = JSON.parse(req.query.params)
-      let start = new Date(data.start)
-      let end = new Date(data.end)
+      let start = new Date(req.query.start)
+      let end = new Date(req.query.end)
       if (start > end) {
-        let s = end
-        let e = start
-        start = s
-        end = e
+        let s = end; let e = start
+        start = s; end = e
       }
       let params = { start, end }
       let result = await serviceDB.QueryAll(params)
@@ -25,9 +22,9 @@ module.exports = {
     }
   },
 
-  findOne: async(req, res) => {
+  findAllOption: async(req, res) => {
     try {
-      let result = await serviceDB.QueryOne(req.params.id)
+      let result = await serviceDB.QueryAllOption()
       if (result.status === true) {
         res.status(200).send(result);
       } else {

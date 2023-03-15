@@ -2,6 +2,7 @@ const fs = require('fs')
 const db = require("../models");
 const bills = db.bills
 const fc = require("./service");
+const moment = require('moment')
 
 let self = module.exports = {
   QueryAll: async(params) => {
@@ -13,6 +14,38 @@ let self = module.exports = {
         }
       })
       let data = await fc.responseData(res, true, 'success')
+      return data
+    } catch (error) {
+      let data = await fc.responseData(null, false, error.message)
+      return data
+    }
+
+  },
+
+  QueryAllOption: async(params) => {
+    try {
+
+      let day = await bills.find({ created_date: { $gte: new Date(moment()).setHours(0, 0, 0, 0) } })
+      day = { qty: day.length, total: day.reduce((a, b) => a + b.total, 0) }
+
+      let week = await bills.find({
+        created_date: {
+          $gte: new Date(moment().add(-7, 'days')).setHours(0, 0, 0, 0),
+          $lte: new Date(moment()).setHours(0, 0, 0, 0)
+        }
+      })
+      week = { qty: week.length, total: week.reduce((a, b) => a + b.total, 0) }
+
+      let month = await bills.find({
+        created_date: {
+          $gte: new Date(moment().startOf('month')).setHours(0, 0, 0, 0),
+          $lte: new Date(moment().endOf('month')).setHours(0, 0, 0, 0)
+        }
+      })
+      month = { qty: month.length, total: month.reduce((a, b) => a + b.total, 0) }
+      
+      let dt = { day, week, month }
+      let data = await fc.responseData(dt, true, 'success')
       return data
     } catch (error) {
       let data = await fc.responseData(null, false, error.message)

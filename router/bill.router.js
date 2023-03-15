@@ -3,9 +3,5 @@ const bill = require('../controller/bill.controller');
 var router = express.Router();
 
 router.get('/', bill.findAll );
-router.get('/:id', bill.findOne );
-router.post('/', bill.create );
-router.put('/:id', bill.update );
-router.delete('/:id', bill.delete );
-
+router.get('/option/', bill.findAllOption );
 module.exports = router;
