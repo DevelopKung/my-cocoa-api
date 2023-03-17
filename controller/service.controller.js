@@ -17,12 +17,14 @@ module.exports = {
       if (!fs.existsSync(tmp)) {
         fs.mkdirSync(tmp, { recursive: true });
       }
+      let path = await readDir(tmp)
 
       if (!fs.existsSync(tmp_products)) {
         fs.mkdirSync(tmp_products, { recursive: true });
       }
-      let path = await readDir(tmp)
-      res.status(200).send({path,tmp_products})
+      let pathProduct = await readDir(tmp_products)
+
+      res.status(200).send({path,pathProduct})
       return
     } catch (error) {
       res.status(200).send(path.join(__dirname, "../"))
