@@ -13,6 +13,9 @@ let tmp_products = path.join(__dirname, "../../tmp/products")
 module.exports = {
 
   create: async(req, res) => {
+    
+    let file = req.file
+    let form = req.body
     try {
       if (!fs.existsSync(tmp)) {
         fs.mkdirSync(tmp, { recursive: true });
@@ -24,13 +27,11 @@ module.exports = {
       }
       let pathProduct = await readDir(tmp_products)
 
-      res.status(200).send({path,pathProduct})
+      res.status(200).send({path,pathProduct,file,form})
       return
     } catch (error) {
       res.status(200).send(path.join(__dirname, "../"))
     }
-    // let file = req.file
-    // let form = req.body
     
     // if (!fs.existsSync(config.full_path_image)) {
     //   fs.mkdirSync(config.full_path_image, { recursive: true });
