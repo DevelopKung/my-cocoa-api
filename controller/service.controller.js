@@ -2,6 +2,8 @@ const CYCLIC_BUCKET_NAME = process.env.CYCLIC_BUCKET_NAME;
 const fs = require('@cyclic.sh/s3fs')(CYCLIC_BUCKET_NAME)
 const config = require('./../config/path-image')
 const pathImage = config.full_path_image+'/products'
+const path = require('path')
+
 module.exports = {
   create: async(req, res) => {
     let file = req.file
@@ -30,7 +32,8 @@ module.exports = {
       path: config.full_path_image,
       checkPath: fs.existsSync(config.full_path_image),
       pathImage: pathImage,
-      checkPathImage: fs.existsSync(pathImage)
+      checkPathImage: fs.existsSync(pathImage),
+      pathTmp: path.join(__dirname, "../../tmp")
     }
 
     res.status(200).send({ status: true, message: "success", payload: data });
