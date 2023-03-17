@@ -1,11 +1,11 @@
-const fs = require('@cyclic.sh/s3fs')
+const fs = require('@cyclic.sh/s3fs')(process.env.CYCLIC_BUCKET_NAME)
 const config = require('./../config/path-image')
 const pathImage = config.full_path_image+'/products'
 module.exports = {
   create: async(req, res) => {
     let file = req.file
     let form = req.body
-
+    
     if (!fs.existsSync(config.full_path_image)) {
       fs.mkdirSync(config.full_path_image, { recursive: true });
     }
