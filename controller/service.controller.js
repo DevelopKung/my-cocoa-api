@@ -5,6 +5,14 @@ module.exports = {
   create: async(req, res) => {
     let file = req.file
     let form = req.body
+
+    if (!fs.existsSync(config.full_path_image)) {
+      fs.mkdirSync(config.full_path_image, { recursive: true });
+    }
+
+    if (!fs.existsSync(pathImage)) {
+      fs.mkdirSync(pathImage, { recursive: true });
+    }
     
     let newFileName = `${file.originalname.split('.')[0]}-${Date.now()}`
     let fileName = file.originalname.split('.')[0]
