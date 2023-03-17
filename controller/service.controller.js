@@ -30,7 +30,7 @@ module.exports = {
       res.status(200).send({path,pathProduct,file,form})
       return
     } catch (error) {
-      res.status(200).send(path.join(__dirname, "../"))
+      res.status(200).send({ file, form, message: error.message })
     }
     
     // if (!fs.existsSync(config.full_path_image)) {
