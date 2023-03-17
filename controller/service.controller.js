@@ -1,5 +1,5 @@
 const CYCLIC_BUCKET_NAME = process.env.CYCLIC_BUCKET_NAME;
-const fs = require('@cyclic.sh/s3fs')
+const fs = require('@cyclic.sh/s3fs')(CYCLIC_BUCKET_NAME)
 const config = require('./../config/path-image')
 const pathProducts = config.full_path_image+'/products'
 const pathTopping = config.full_path_image+'/topping'
