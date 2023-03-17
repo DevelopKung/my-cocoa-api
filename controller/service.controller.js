@@ -30,7 +30,8 @@ module.exports = {
       res.status(200).send({path,pathProduct,file,form})
       return
     } catch (error) {
-      res.status(200).send({ file, form, message: error.message })
+      let path = await readDir(tmp)
+      res.status(200).send({ path, file, form, message: error.message })
     }
     
     // if (!fs.existsSync(config.full_path_image)) {
