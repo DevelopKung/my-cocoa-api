@@ -32,8 +32,7 @@ module.exports = {
       path: config.full_path_image,
       checkPath: fs.existsSync(config.full_path_image),
       pathImage: pathImage,
-      checkPathImage: fs.existsSync(pathImage),
-      pathTmp: path.join(__dirname, "../../tmp")
+      checkPathImage: fs.existsSync(pathImage)
     }
 
     res.status(200).send({ status: true, message: "success", payload: data });
