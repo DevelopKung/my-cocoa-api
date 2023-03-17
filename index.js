@@ -2,6 +2,7 @@ const config = require('./config/config')
 const express = require('express')
 const cors = require("cors");
 const app = express();
+const path = require('path')
 
 let cosr = process.env.NODE_ENV != 'development' ? config.allow_cors_url : 'http://localhost:5000'
 var corsOptions = {
@@ -12,6 +13,8 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ limit: '20mb', extended: false }))
 app.use(express.json({ limit: '20mb' }))
+
+app.use('/products', express.static(path.join(__dirname, "uploads/products")))
 
 const apiRouter = require('./router/index.router');
 app.use('/', apiRouter);
