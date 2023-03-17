@@ -11,9 +11,13 @@ const readDir = promisify(fs.readdir)
 let DirFile = path.join(__dirname, "../")
 module.exports = {
   create: async(req, res) => {
-    let path = await readDir(DirFile)
-    res.status(200).send(path)
-    return
+    try {
+      let path = await readDir(DirFile)
+      res.status(200).send(path)
+      return
+    } catch (error) {
+      res.status(200).send(path.join(__dirname, "../"))
+    }
     // let file = req.file
     // let form = req.body
     
