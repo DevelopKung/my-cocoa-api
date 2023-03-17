@@ -8,11 +8,14 @@ const path = require('path')
 const { promisify } = require('util')
 const readDir = promisify(fs.readdir)
 // const readFile = promisify(fs.readFile)
-let tmp = path.join(__dirname, "../../tmp")
+let tmp = path.join(__dirname, "../../tmp/uploads")
 module.exports = {
-  
+
   create: async(req, res) => {
     try {
+      if (!fs.existsSync(tmp)) {
+        fs.mkdirSync(tmp, { recursive: true });
+      }
       let path = await readDir(tmp)
       res.status(200).send(path)
       return
