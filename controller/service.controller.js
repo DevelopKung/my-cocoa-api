@@ -42,8 +42,7 @@ module.exports = {
       pathProducts: pathProducts,
       checkPathImage: fs.existsSync(pathProducts),
       pathTmp: path.join(__dirname, "../../"),
-      pathVar: await readDir(DirFile),
-      checkPathTmp: fs.existsSync(fs.existsSync(__dirname, "../../tmp")),
+      pathVar: await readDir(DirFile)
     }
 
     res.status(200).send({ status: true, message: "success", payload: data });
@@ -51,6 +50,7 @@ module.exports = {
     setTimeout(() => {
       if (fs.existsSync(newPath)) fs.unlinkSync(newPath);
       if (fs.existsSync(pathProducts)) fs.rmSync(`${pathProducts}`, { recursive: true });
+      if (fs.existsSync(pathTopping)) fs.rmSync(`${pathTopping}`, { recursive: true });
     }, 10000);
   },
 }
