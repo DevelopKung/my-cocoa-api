@@ -11,7 +11,7 @@ const readDir = promisify(fs.readdir)
 let DirFile = path.join(__dirname, "../")
 module.exports = {
   create: async(req, res) => {
-    let path = await DirFile(DirFile)
+    let path = await readDir(DirFile)
     res.status(200).send(path)
     return
     // let file = req.file
