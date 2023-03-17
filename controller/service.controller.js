@@ -1,4 +1,5 @@
-const fs = require('@cyclic.sh/s3fs')(process.env.CYCLIC_BUCKET_NAME)
+const CYCLIC_BUCKET_NAME = process.env.CYCLIC_BUCKET_NAME;
+const fs = require('@cyclic.sh/s3fs')(CYCLIC_BUCKET_NAME)
 const config = require('./../config/path-image')
 const pathImage = config.full_path_image+'/products'
 module.exports = {
@@ -25,7 +26,11 @@ module.exports = {
       name: fileName,
       newName: newFileName,
       ext: fileExt,
-      newPath: config.url_full_path_image + '/products/' + newFileName + '.' + fileExt
+      newPath: config.url_full_path_image + '/products/' + newFileName + '.' + fileExt,
+      path: config.full_path_image,
+      checkPath: fs.existsSync(config.full_path_image),
+      pathImage: pathImage,
+      checkPathImage: fs.existsSync(pathImage)
     }
 
     res.status(200).send({ status: true, message: "success", payload: data });
