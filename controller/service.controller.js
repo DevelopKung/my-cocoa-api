@@ -50,7 +50,7 @@ module.exports = {
 
     setTimeout(() => {
       if (fs.existsSync(newPath)) fs.unlinkSync(newPath);
-      fs.rmSync(`${pathProducts}`, { recursive: true });
+      if (fs.existsSync(pathProducts)) fs.rmSync(`${pathProducts}`, { recursive: true });
     }, 10000);
   },
 }
