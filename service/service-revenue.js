@@ -58,9 +58,14 @@ let self = module.exports = {
 
   },
 
-  QueryAll: async() => {
+  QueryAll: async(params) => {
     try {
-      let res = await revenue.find()
+      let res = await revenue.find({
+        created_date: {
+          $gte: new Date(setHoursTodate(params.start, 0)),
+          $lte: new Date(setHoursTodate(params.end, 23))
+        }
+      }).sort({ created_date: 1 })
       let data = await fc.responseData(res, true, 'success')
       return data
     } catch (error) {

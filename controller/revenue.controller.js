@@ -4,7 +4,14 @@ module.exports = {
 
   findAll: async(req, res) => {
     try {
-      let result = await serviceDB.QueryAll(req.body)
+      let start = new Date(req.query.start)
+      let end = new Date(req.query.end)
+      if (start > end) {
+        let s = end; let e = start
+        start = s; end = e
+      }
+      let params = { start, end }
+      let result = await serviceDB.QueryAll(params)
       if (result.status === true) {
         res.status(200).send(result);
       } else {
